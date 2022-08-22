@@ -4,8 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/user/Documents/GitHub/AndroidExample/MusicExample/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/user/Documents/GitHub/AndroidExample/MusicExample/app/src/main/res/layout/fragment_list.xml" value="0.16041666666666668" />
         <entry key="..\:/Users/user/Documents/GitHub/AndroidExample/MusicExample/app/src/main/res/layout/fragment_music_list.xml" value="0.165625" />
         <entry key="..\:/Users/user/Documents/GitHub/AndroidExample/MusicExample/app/src/main/res/layout/fragment_player.xml" value="0.165625" />
+        <entry key="..\:/Users/user/Documents/GitHub/AndroidExample/MusicExample/app/src/main/res/layout/item_music.xml" value="0.16041666666666668" />
       </map>
     </option>
   </component>

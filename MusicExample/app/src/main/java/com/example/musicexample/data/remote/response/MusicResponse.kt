@@ -17,7 +17,8 @@ data class MusicResponse(
         val coverUrl: String
     )
 
-    fun MusicItem.toEntity() = MusicEntity.MusicItem(
+    fun MusicItem.toEntity(id: Long) = MusicEntity.MusicItem(
+        id = id,
         track = track,
         streamUrl = streamUrl,
         artist = artist,
@@ -26,5 +27,5 @@ data class MusicResponse(
 }
 
 fun MusicResponse.toEntity() = MusicEntity(
-    musics = musics.map { it.toEntity() }
+    musics = musics.mapIndexed { index, it -> it.toEntity(index.toLong()) }
 )
