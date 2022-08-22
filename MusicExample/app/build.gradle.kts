@@ -88,4 +88,7 @@ dependencies {
 
     androidTestImplementation(Dependency.AndroidTest.ANDROID_JUNIT)
     androidTestImplementation(Dependency.AndroidTest.ESPRESSO_CORE)
+
+    implementation(Dependency.BottomNav.NAV_FRAGMENT)
+    implementation(Dependency.BottomNav.NAV_UI)
 }
