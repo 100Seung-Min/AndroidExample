@@ -26,7 +26,7 @@ object Versions {
     const val RETROFIT = "2.7.1"
     const val OKHTTP = "3.14.9"
 
-    const val EXOPLAYER = "2.18.1"
+    const val EXOPLAYER = "2.13.3"
 
     const val JUNIT = "4.13.2"
     const val MOCKITO = "4.2.0"
@@ -35,5 +35,5 @@ object Versions {
 
     const val NAV = "2.4.1"
 
-    const val COIL = "2.2.0"
+    const val COIL = "2.1.0"
 }
