@@ -91,4 +91,6 @@ dependencies {
 
     implementation(Dependency.BottomNav.NAV_FRAGMENT)
     implementation(Dependency.BottomNav.NAV_UI)
+
+    implementation(Dependency.Coil.COIL)
 }

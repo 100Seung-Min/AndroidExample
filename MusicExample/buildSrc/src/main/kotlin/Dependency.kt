@@ -60,4 +60,8 @@ object Dependency {
         const val NAV_FRAGMENT = "androidx.navigation:navigation-fragment-ktx:${Versions.NAV}"
         const val NAV_UI = "androidx.navigation:navigation-ui-ktx:${Versions.NAV}"
     }
+
+    object Coil {
+        const val COIL = "io.coil-kt:coil:${Versions.COIL}"
+    }
 }

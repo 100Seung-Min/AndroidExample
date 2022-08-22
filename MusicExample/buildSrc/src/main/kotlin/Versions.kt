@@ -34,4 +34,6 @@ object Versions {
     const val ESPRESSO_CORE = "3.3.0"
 
     const val NAV = "2.4.1"
+
+    const val COIL = "2.2.0"
 }
