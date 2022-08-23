@@ -28,7 +28,6 @@ class PlayerFragment: BaseFragment<FragmentPlayerBinding>(R.layout.fragment_play
         initExoPlayer()
         initMusicList()
         initController()
-        initSeekBar()
         observeView()
     }
 
@@ -73,6 +72,7 @@ class PlayerFragment: BaseFragment<FragmentPlayerBinding>(R.layout.fragment_play
     }
 
     private fun initController() = binding.apply {
+        musicProgress.onStopTrackingTouch { this@PlayerFragment.player?.seekTo(it.progress * 1000L) }
         playBtn.setOnClickListener {
             val player = this@PlayerFragment.player ?: return@setOnClickListener
             if(player.isPlaying) player.pause()
@@ -84,10 +84,6 @@ class PlayerFragment: BaseFragment<FragmentPlayerBinding>(R.layout.fragment_play
         prevBtn.setOnClickListener {
             musicViewModel.prevMusic()
         }
-    }
-    
-    private fun initSeekBar() = binding.apply {
-        musicProgress.onStopTrackingTouch { this@PlayerFragment.player?.seekTo(it.progress * 1000L) }
     }
 
     private fun update() {
