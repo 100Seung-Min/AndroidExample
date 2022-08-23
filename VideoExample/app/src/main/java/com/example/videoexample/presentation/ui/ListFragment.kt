@@ -1,7 +1,6 @@
 package com.example.videoexample.presentation.ui
 
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.videoexample.R
 import com.example.videoexample.databinding.FragmentListBinding
@@ -22,6 +21,9 @@ class ListFragment: BaseFragment<FragmentListBinding>(R.layout.fragment_list) {
 
     private fun initRecyclerView() {
         adapter = ListAdapter {
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(binding.videoFragment.id, VideoFragment())
+                .commit()
         }
         binding.videoList.apply {
             adapter = this@ListFragment.adapter

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="video"
+            type="com.example.videoexample.presentation.ui.VideoFragment" />
+    </data>
+
+    <com.example.videoexample.presentation.extesion.CustomMotionLayout
+        android:id="@+id/videoMotionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/fragment_video_scene">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/playerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/videoPlayer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/playerContainer"
+            app:layout_constraintStart_toStartOf="@id/playerContainer"
+            app:layout_constraintTop_toTopOf="@id/playerContainer" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/playerContainer" />
+
+    </com.example.videoexample.presentation.extesion.CustomMotionLayout>
+</layout>

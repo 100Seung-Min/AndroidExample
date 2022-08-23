@@ -15,8 +15,11 @@ class ListAdapter(private val callback: (VideoItem) -> Unit): ListAdapter<VideoI
     inner class ViewHolder(private val binding: ItemVideoBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(video: VideoItem) = binding.apply {
             videoData = video
-            coverImg.load(video.thumb) {
-                transformations(RoundedCornersTransformation(0f, 0f, 0f, 0f))
+            coverImg.apply {
+                load(video.thumb) {
+                    transformations(RoundedCornersTransformation(0f, 0f, 0f, 0f))
+                }
+                setOnClickListener { callback(video) }
             }
         }
     }

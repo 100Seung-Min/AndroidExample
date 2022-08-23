@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="300"
+        motion:autoTransition="animateToEnd">
+       <KeyFrameSet>
+       </KeyFrameSet>
+        <OnSwipe motion:touchAnchorId="@+id/playerContainer"
+            motion:touchAnchorSide="bottom"/>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/playerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="50dp"/>
+        <Constraint
+            android:id="@+id/recyclerView"
+            android:visibility="invisible"/>
+        <Constraint
+            android:id="@+id/videoPlayer"
+            android:layout_width="100dp"
+            motion:layout_constraintTop_toTopOf="@id/playerContainer"
+            motion:layout_constraintBottom_toBottomOf="@id/playerContainer"
+            motion:layout_constraintStart_toStartOf="@id/playerContainer"
+            android:layout_marginStart="30dp"/>
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/videoPlayer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/playerContainer"
+            motion:layout_constraintTop_toTopOf="@id/playerContainer"
+            motion:layout_constraintStart_toStartOf="@id/playerContainer"
+            motion:layout_constraintEnd_toEndOf="@id/playerContainer"/>
+        <Constraint
+            android:id="@+id/playerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/recyclerView"
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@id/playerContainer" />
+    </ConstraintSet>
+</MotionScene>

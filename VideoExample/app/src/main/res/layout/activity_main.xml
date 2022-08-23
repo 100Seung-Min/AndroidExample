@@ -9,25 +9,27 @@
             type="com.example.videoexample.presentation.ui.MainActivity" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mainMotionLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layoutDescription="@xml/activity_main_scene"
         tools:context=".presentation.ui.MainActivity">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNav"
-            app:menu="@menu/bottom_nav_menu"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
 
         <fragment
             android:id="@+id/frame_layout"
             android:name="androidx.navigation.fragment.NavHostFragment"
-            app:defaultNavHost="true"
-            app:navGraph="@navigation/bottom_nav_graph"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/bottom_nav_graph" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 </layout>
