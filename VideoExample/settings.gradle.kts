@@ -13,4 +13,5 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "VideoExample"
-include ':app'
+include(":app")
+
