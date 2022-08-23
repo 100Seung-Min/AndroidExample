@@ -1,5 +1,6 @@
 package com.example.videoexample.presentation.di
 
+import com.example.videoexample.data.remote.api.VideoAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,5 +44,11 @@ object NetworkModule {
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideVideoService(retrofit: Retrofit): VideoAPI {
+        return retrofit.create(VideoAPI::class.java)
     }
 }
