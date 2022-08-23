@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_nav_graph"
+    app:startDestination="@id/listFragment">
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="com.example.videoexample.presentation.ui.ListFragment"
+        tools:layout="@layout/fragment_list"
+        android:label="ListFragment" />
+    <fragment
+        android:id="@+id/shortsFragment"
+        android:name="com.example.videoexample.presentation.ui.ShortsFragment"
+        tools:layout="@layout/fragment_shorts"
+        android:label="ShortsFragment" />
+</navigation>
