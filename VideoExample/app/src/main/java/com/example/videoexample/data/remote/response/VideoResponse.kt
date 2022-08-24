@@ -20,7 +20,8 @@ data class VideoResponse(
         val title: String
     )
 
-    fun VideoItem.toEntity() = VideoEntity.VideoItem(
+    fun VideoItem.toEntity(id: Long) = VideoEntity.VideoItem(
+        id = id,
         description = description,
         sources = sources,
         subtitle = subtitle,
@@ -30,5 +31,5 @@ data class VideoResponse(
 }
 
 fun VideoResponse.toEntity() = VideoEntity(
-    videos = videos.map { it.toEntity() }
+    videos = videos.mapIndexed { index, videoItem -> videoItem.toEntity(index.toLong()) }
 )

@@ -4,6 +4,7 @@ data class VideoEntity(
     val videos: List<VideoItem>
 ) {
     data class VideoItem(
+        val id: Long,
         val description: String,
         val sources: String,
         val subtitle: String,

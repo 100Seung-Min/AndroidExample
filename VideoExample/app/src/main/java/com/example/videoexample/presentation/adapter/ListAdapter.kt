@@ -41,7 +41,7 @@ class ListAdapter(private val callback: (VideoItem) -> Unit): ListAdapter<VideoI
     companion object {
         val diffUtil = object : DiffUtil.ItemCallback<VideoItem>() {
             override fun areItemsTheSame(oldItem: VideoItem, newItem: VideoItem): Boolean {
-                return oldItem == newItem
+                return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: VideoItem, newItem: VideoItem): Boolean {
