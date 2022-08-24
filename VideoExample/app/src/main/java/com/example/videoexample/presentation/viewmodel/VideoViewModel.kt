@@ -17,6 +17,9 @@ class VideoViewModel @Inject constructor(
 ): ViewModel() {
     private val _videoList = MutableLiveData<List<VideoItem>>()
     val videoList: LiveData<List<VideoItem>> get() = _videoList
+    private val _currentVideo = MutableLiveData<VideoItem>()
+    val currentVideo: LiveData<VideoItem> get() = _currentVideo
+
     fun getVideoList() {
         viewModelScope.launch {
             videoListUseCase.execute().let { response ->
@@ -25,5 +28,9 @@ class VideoViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun setCurrentVideo(video: VideoItem) {
+        _currentVideo.value = video
     }
 }
