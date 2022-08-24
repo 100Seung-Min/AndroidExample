@@ -17,7 +17,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/playerContainer"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="250dp"
+            android:background="@color/black"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.exoplayer2.ui.PlayerView
@@ -30,8 +31,8 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:background="@color/black"
             android:layout_width="match_parent"
+            android:background="@color/white"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/playerContainer" />
