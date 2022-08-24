@@ -25,6 +25,7 @@
             android:id="@+id/videoPlayer"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            app:resize_mode="fill"
             app:layout_constraintBottom_toBottomOf="@id/playerContainer"
             app:layout_constraintStart_toStartOf="@id/playerContainer"
             app:layout_constraintTop_toTopOf="@id/playerContainer" />
