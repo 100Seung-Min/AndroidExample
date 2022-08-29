@@ -1,6 +1,7 @@
 package com.example.videoexample.presentation.ui
 
 import android.net.Uri
+import android.util.Log
 import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
