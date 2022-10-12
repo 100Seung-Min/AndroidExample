@@ -11,6 +11,7 @@ object Versions {
 
     const val GRADLE_ANDROID = "7.3.0"
     const val GRADLE_KOTLIN = "1.7.0"
+    const val GRADLE_MAP = "2.0.1"
 
     const val CORE_KTX = "1.7.0"
     const val APP_COMPAT = "1.5.1"
