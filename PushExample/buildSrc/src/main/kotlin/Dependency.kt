@@ -15,6 +15,7 @@ object Dependency {
         const val MATERIAL = "com.google.android.material:material:${Versions.MATERIAL}"
         const val FIREBASE_BOM = "com.google.firebase:firebase-bom:${Versions.FIREBASE_BOM}"
         const val FIREBASE_ANALYTICS = "com.google.firebase:firebase-analytics-ktx:${Versions.FIREBASE_ANALYTICS}"
+        const val FIREBASE_MESSAGE = "com.google.firebase:firebase-messaging-ktx:${Versions.FIREBASE_MESSAGE}"
     }
 
     object Junit {

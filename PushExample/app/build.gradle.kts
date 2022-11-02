@@ -59,6 +59,7 @@ dependencies {
     implementation(Dependency.Google.MATERIAL)
     platform(Dependency.Google.FIREBASE_BOM)
     implementation(Dependency.Google.FIREBASE_ANALYTICS)
+    implementation(Dependency.Google.FIREBASE_MESSAGE)
     testImplementation(Dependency.Junit.JUNIT)
     androidTestImplementation(Dependency.Junit.JUNIT_TEST)
     androidTestImplementation(Dependency.Espresso.ESPRESSO_TEST)

@@ -20,6 +20,7 @@ object Versions {
     const val MATERIAL = "1.6.1"
     const val FIREBASE_BOM = "31.0.2"
     const val FIREBASE_ANALYTICS = "21.2.0"
+    const val FIREBASE_MESSAGE = "23.1.0"
 
     const val JUNIT = "4.13.2"
     const val JUNIT_TEST = "1.1.3"
