@@ -1,1 +1,3 @@
 **/buildSrc/build
+**/local.properties
+**/keystore.properties
