@@ -16,6 +16,12 @@ fun getImageDirectory(): List<String> {
     return imgList.reversed()
 }
 
+fun photoName(): File {
+    val sdCard = Environment.getExternalStorageDirectory()
+    val fileName = LocalDateTime.now().toString()
+    return File(sdCard, "${fileName}.jpg")
+}
+
 fun String.getDirectoryPaths(): List<String> {
     var directoryList = listOf<String>()
     File(this).listFiles().forEach {
