@@ -2,42 +2,39 @@ package com.example.socketexample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import io.ktor.client.*
-import io.ktor.client.plugins.websocket.*
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.routing.*
-import io.rsocket.kotlin.ktor.client.RSocketSupport
-import io.rsocket.kotlin.ktor.client.rSocket
-import io.rsocket.kotlin.payload.buildPayload
-import io.rsocket.kotlin.payload.data
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.WebSocket
+import okhttp3.WebSocketListener
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var webSocket: WebSocket
+    private val client by lazy { OkHttpClient() }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
-        Thread {
-            kotlin.run {
-                MainScope().launch {
-                    val client = HttpClient {
-                        install(WebSockets)
-                        install(RSocketSupport)
-                        hostIsIp("192.168.0.6")
-                    }
-                    val rSocket = client.rSocket(path = "rs", port = 6565)
-                    val stream = rSocket.requestStream(buildPayload { data("dsds") })
-                    stream.collect {
-                        println("안녕 $it")
-                    }
+        val request = Request.Builder()
+            .url("ws://192.168.0.6:8080/ws/messages")
+            .build()
+        val listener = object : WebSocketListener() {
+            override fun onMessage(webSocket: WebSocket, text: String) {
+                super.onMessage(webSocket, text)
+                runOnUiThread {
+                    findViewById<TextView>(R.id.receiveTxt).text = text
                 }
             }
         }
+        webSocket = client.newWebSocket(request, listener)
+        findViewById<AppCompatButton>(R.id.sendBtn).setOnClickListener {
+            webSocket.send(findViewById<TextView>(R.id.editText).text.toString())
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        webSocket.close(1000, "Close")
+        client.dispatcher().executorService().shutdown()
     }
 }
