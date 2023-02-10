@@ -3,7 +3,7 @@ package com.example.socketexample
 import okhttp3.*
 
 class SocketClient(receiveAction: (String) -> Unit) {
-    private lateinit var webSocket: WebSocket
+    private var webSocket: WebSocket
     private val client by lazy { OkHttpClient() }
 
     init {
