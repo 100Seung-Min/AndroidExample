@@ -21,40 +21,23 @@ import com.example.socketexample.ui.theme.SocketExampleTheme
 import okhttp3.*
 
 class MainActivity : ComponentActivity() {
-    private lateinit var webSocket: WebSocket
-    private val client by lazy { OkHttpClient() }
-
+    private lateinit var socketClient: SocketClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             var chatList = remember { mutableStateListOf<ChatData>() }
-            val request = Request.Builder()
-                .url("ws://192.168.0.6:8080/ws/messages")
-                .build()
-            val listener = object : WebSocketListener() {
-                override fun onOpen(webSocket: WebSocket, response: Response) {
-                    super.onOpen(webSocket, response)
-                    println("안녕 소켓 연결 성공")
-                }
-
-                override fun onMessage(webSocket: WebSocket, text: String) {
-                    super.onMessage(webSocket, text)
-                    runOnUiThread {
-                        chatList.add(ChatData(text = text, isMe = false))
-                    }
-                }
-
-                override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
-                    super.onFailure(webSocket, t, response)
-                    println("안녕 소켓 연결 실패 ${t}")
-                }
+            socketClient = SocketClient {
+                chatList.add(ChatData(text = it, isMe = false))
             }
-            webSocket = client.newWebSocket(request, listener)
             SocketExampleTheme {
                 Column(
                     modifier = Modifier.fillMaxSize()
                 ) {
                     ChatList(chatList)
+                    ChatInput {
+                        socketClient.send(text = it)
+                        chatList.add(ChatData(text = it, isMe = true))
+                    }
                 }
             }
         }
@@ -62,8 +45,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        webSocket.close(1000, "Close")
-        client.dispatcher().executorService().shutdown()
+        socketClient.close()
     }
 
     @Composable
@@ -73,21 +55,23 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth()
                 .fillMaxHeight(0.93f)
         ) {
-            itemsIndexed(chatList) { index, item ->
+            itemsIndexed(chatList) { _, item ->
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight(),
-                    horizontalArrangement = if (item.isMe) Arrangement.Start else Arrangement.End
+                    horizontalArrangement = if (item.isMe) Arrangement.End else Arrangement.Start
                 ) {
-                    Text(text = item.text)
+                    Text(text = item.text, modifier = Modifier.background(if (item.isMe) Color.Blue else Color.Gray))
                 }
             }
         }
     }
 
     @Composable
-    fun ChatInput() {
+    fun ChatInput(
+        sendAction: (String) -> Unit
+    ) {
         var text by remember { mutableStateOf("") }
         Row(
             modifier = Modifier
@@ -105,7 +89,8 @@ class MainActivity : ComponentActivity() {
             )
             Button(
                 onClick = {
-                    webSocket.send(text)
+                    sendAction(text)
+                    text = ""
                 }, modifier = Modifier
                     .fillMaxHeight()
                     .fillMaxWidth(1f)
@@ -120,7 +105,9 @@ class MainActivity : ComponentActivity() {
     fun DefaultPreview() {
         SocketExampleTheme {
             ChatList(listOf())
-            ChatInput()
+            ChatInput {
+
+            }
         }
     }
 }
