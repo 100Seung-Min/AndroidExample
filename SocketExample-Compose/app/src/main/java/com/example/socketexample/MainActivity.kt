@@ -10,10 +10,12 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -30,8 +32,13 @@ class MainActivity : ComponentActivity() {
     @Stable
     private val counselorChat =
         RoundedCornerShape(topStart = 0.dp, topEnd = 5.dp, bottomEnd = 5.dp, bottomStart = 5.dp)
+
+    @Stable
     private val clientChat =
         RoundedCornerShape(topStart = 5.dp, topEnd = 5.dp, bottomEnd = 0.dp, bottomStart = 5.dp)
+
+    @Stable
+    private val chatInput = RoundedCornerShape(13.dp)
 
 
     private lateinit var socketClient: SocketClient
@@ -62,6 +69,7 @@ class MainActivity : ComponentActivity() {
                             scrollState.scrollToItem(chatList.size - 1)
                         }
                     }
+                    Spacer(modifier = Modifier.height(5.dp))
                 }
             }
         }
@@ -132,15 +140,9 @@ class MainActivity : ComponentActivity() {
                     isExpand = true
                 }
             }
-            TextField(
-                value = text,
-                onValueChange = { text = it },
-                modifier = Modifier
-                    .fillMaxHeight()
-                    .weight(1f)
-                    .background(Color.White),
-                textStyle = TextStyle(fontSize = 15.sp)
-            )
+            ChatEditText(value = text, modifier = Modifier.weight(1f), onValueChange = {
+                text = it
+            })
             IconButton(icon = Icons.Default.Send) {
                 if (!text.isNullOrBlank()) {
                     sendAction(text)
@@ -149,6 +151,33 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    fun ChatEditText(value: String, onValueChange: (String) -> Unit, modifier: Modifier) {
+        Row(
+            modifier = modifier
+                .fillMaxHeight()
+                .background(color = Color.White, shape = chatInput)
+                .border(width = 1.dp, color = Color(0xD2D2D2), shape = chatInput),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            BasicTextField(
+                value = value,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 15.dp, vertical = 5.dp),
+                onValueChange = { onValueChange(it) },
+                decorationBox = @Composable {
+                    Box(
+                        contentAlignment = Alignment.CenterStart,
+                    ) {
+                        it()
+                    }
+                }
+            )
+        }
+    }
+
 
     @Composable
     fun IconButton(

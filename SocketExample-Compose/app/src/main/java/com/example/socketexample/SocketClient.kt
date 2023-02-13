@@ -1,6 +1,8 @@
 package com.example.socketexample
 
 import okhttp3.*
+import okio.ByteString
+import java.io.File
 
 class SocketClient(receiveAction: (String) -> Unit) {
     private var webSocket: WebSocket
@@ -8,7 +10,8 @@ class SocketClient(receiveAction: (String) -> Unit) {
 
     init {
         val request = Request.Builder()
-            .url("ws://port-0-mitalk-backend-108dypx2aldtri5ke.sel3.cloudtype.app/ws/messages")
+            .url("ws://192.168.0.6:8082/ws/chat")
+            .addHeader("Authorization", "Test Baek")
             .build()
         val listener = object : WebSocketListener() {
             override fun onOpen(webSocket: WebSocket, response: Response) {
@@ -34,5 +37,10 @@ class SocketClient(receiveAction: (String) -> Unit) {
 
     fun send(text: String) {
         webSocket.send(text)
+    }
+
+    fun sendFile() {
+        val file = File("").readBytes()
+        webSocket.send(ByteString.encodeUtf8(file.toString()))
     }
 }
