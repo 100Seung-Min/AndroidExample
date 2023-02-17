@@ -10,7 +10,7 @@ class SocketClient(receiveAction: (String) -> Unit) {
 
     init {
         val request = Request.Builder()
-            .url("ws://192.168.0.6:8082/ws/chat")
+            .url("wss://port-0-mitalk-backend-3a9t2ble55e2fi.sel3.cloudtype.app/ws/chat")
             .addHeader("Authorization", "Test Baek")
             .build()
         val listener = object : WebSocketListener() {

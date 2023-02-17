@@ -80,9 +80,10 @@ class MainActivity : ComponentActivity() {
         socketClient.close()
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     fun ChatList(chatList: List<ChatData>, chatListState: LazyListState) {
-
+        var itemVisible by remember { mutableStateOf<String?>(null) }
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -95,17 +96,38 @@ class MainActivity : ComponentActivity() {
                         .fillMaxWidth()
                         .wrapContentHeight()
                         .padding(start = 20.dp, end = 10.dp),
-                    horizontalArrangement = if (item.isMe) Arrangement.End else Arrangement.Start
+                    horizontalArrangement = if (item.isMe) Arrangement.End else Arrangement.Start,
                 ) {
-                    Text(
-                        text = item.text,
-                        modifier = Modifier
-                            .background(
-                                color = if (item.isMe) Color.White else Color.LightGray,
-                                shape = if (item.isMe) clientChat else counselorChat
+                    Column {
+                        Box {
+                            if (itemVisible == item.text) {
+                                Box(
+                                    modifier = Modifier
+                                        .offset(y = (-25).dp)
+                                        .align(Alignment.CenterEnd)
+                                ) {
+                                    Text(text = "수정", modifier = Modifier.background(Color.Red))
+                                }
+                            }
+                            Text(
+                                text = item.text,
+                                modifier = Modifier
+                                    .background(
+                                        color = if (item.isMe) Color.White else Color.LightGray,
+                                        shape = if (item.isMe) clientChat else counselorChat
+                                    )
+                                    .padding(horizontal = 7.dp, vertical = 5.dp)
+                                    .combinedClickable(
+                                        onLongClick = {
+                                            itemVisible =
+                                                if (itemVisible == item.text) null else item.text
+                                        },
+                                        onClick = {
+                                            itemVisible = null
+                                        })
                             )
-                            .padding(horizontal = 7.dp, vertical = 5.dp)
-                    )
+                        }
+                    }
                 }
             }
         }
